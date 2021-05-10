@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
-import { User } from '../../user/models/user.entity'
-
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { User } from '../../user/models/user.entity';
+import { Client } from '../../clients/entities/client.entity';
 
 @Entity()
 export class Company {
@@ -54,4 +54,7 @@ export class Company {
   @ManyToMany(() => User)
   @JoinTable()
   users: User[];
+
+  @OneToMany(() => Client, client => client.company)
+  clients: Client[];
 }
