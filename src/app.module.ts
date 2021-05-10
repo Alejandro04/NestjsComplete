@@ -9,6 +9,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { ConsultsModule } from './consults/consults.module';
 import { ClientsModule } from './clients/clients.module';
 import { HairdresingsModule } from './hairdresings/hairdresings.module';
+import { PatientsModule } from './patients/patients.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { HairdresingsModule } from './hairdresings/hairdresings.module';
     CompaniesModule,
     ConsultsModule,
     ClientsModule,
-    HairdresingsModule
+    HairdresingsModule,
+    PatientsModule
   ],
   controllers: [AppController],
   providers: [AppService],
