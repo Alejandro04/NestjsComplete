@@ -1,73 +1,254 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+### 1. Create project
 ```bash
-$ npm install
+npm i -g @nestjs/cli
+nest new tasks-api
+npm run start:dev
 ```
-
-## Running the app
-
+### 2. Overview and delete files
+### 3. Create module
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+nest g mo tasks
+nest g s tasks/services/tasks
+nest g s tasks/services/tasks --flat
+nest g co tasks/controllers/tasks --flat
 ```
+### 4. Check endpoint and create CRUD
+```ts
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 
-## Test
+@Controller('api/tasks')
+export class TasksControllerController {
 
+  @Get()
+  findAll() {
+    return [1,2,3];
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return id;
+  }
+
+  @Post()
+  create(@Body() body: any) {
+    return body;
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() body: any) {
+    return body;
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return true;
+  }
+
+}
+```
+### 5. Intall DB (Docker)
+```yml
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=nico
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql
+```
+https://dev.to/andrewallison/docker-and-windows-1cb0
+
+### 6. Add .gitignore /postgres_data
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker-compose up -d postgres
+docker-compose exec postgres bash
+psql -h localhost -d my_db -U nico
+\d+
+\q
 ```
+### 7. Intall TypeOrm
+```bash
+npm install --save @nestjs/typeorm typeorm pg
+```
+### 8. App Module
+```ts
+TypeOrmModule.forRoot({
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'nico',
+  password: 'postgres',
+  database: 'my_db',
+  entities: ['dist/**/*.entity{.ts,.js}'],
+  synchronize: false,
+  retryDelay: 3000,
+  retryAttempts: 10
+}),
+```
+### 9. Task Entity
+```ts
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-## Support
+@Entity()
+export class Task {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  @Column()
+  name: string;
 
-## Stay in touch
+  @Column({ default: false })
+  completed: boolean;
+}
+```
+### 10. Tasks Module
+```ts
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+import { Task } from './entities/task.entity';
+import { TasksService } from './services/tasks.service';
+import { TasksController } from './controllers/tasks.controller';
 
-## License
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([Task])
+  ],
+  providers: [TasksService],
+  controllers: [TasksController]
+})
+export class TasksModule {}
+```
+### 11 Service
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Task } from './../entities/task.entity';
 
-Nest is [MIT licensed](LICENSE).
+@Injectable()
+export class TasksService {
+
+  constructor(
+    @InjectRepository(Task) private tasksRepo: Repository<Task>,
+  ) {}
+
+  findAll() {
+    return this.tasksRepo.find();
+  }
+
+  findOne(id: number) {
+    return this.tasksRepo.findOne(id);
+  }
+
+  create(body: any) {
+    const newTask = new Task();
+    newTask.name = body.name;
+    // const newTask = this.tasksRepo.create(body);
+    return this.tasksRepo.save(newTask);
+  }
+
+  async update(id: number, body: any) {
+    const task = await this.tasksRepo.findOne(id);
+    this.tasksRepo.merge(task, body);
+    return this.tasksRepo.save(task);
+  }
+
+  async remove(id: number) {
+    await this.tasksRepo.delete(id);
+    return true;
+  }
+}
+```
+### 12 Controller
+```ts
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+
+import { TasksService } from './../services/tasks.service';
+
+@Controller('api/tasks')
+export class TasksController {
+
+  constructor(
+    private tasksService: TasksService
+  ) {}
+
+  @Get()
+  findAll() {
+    return this.tasksService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.tasksService.findOne(id);
+  }
+
+  @Post()
+  create(@Body() body: any) {
+    return this.tasksService.create(body);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() body: any) {
+    return this.tasksService.update(id, body);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.tasksService.remove(id);
+  }
+
+}
+```
+### 13 Migrations
+```json
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "nico",
+  "password": "postgres",
+  "database": "my_db",
+  "entities": ["src/**/*.entity.ts"],
+  "synchronize": false,
+  "migrationsTableName": "migrations",
+  "migrations": ["src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
+}
+```
+### 14 Create mpm scripts
+```json
+"typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+"migrations:generate": "npm run typeorm -- migration:generate -n",
+"migrations:run": "npm run typeorm -- migration:run",
+"migrations:drop": "npm run typeorm -- schema:drop",
+"migrations:show": "npm run typeorm -- migration:show"
+```
+```bash
+npm run migrations:generate -- init
+npm run migrations:run
+```
+### 15. Set entity
+```ts
+@CreateDateColumn({
+  name: 'creation_at',
+  type: 'timestamptz',
+  default: () => 'CURRENT_TIMESTAMP',
+})
+creationAt: Date;
+
+@UpdateDateColumn({ name: 'updated_at', type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+updatedAt: Date;
+```
+```bash
+npm run migrations:generate -- change-tasks
+npm run migrations:run
+```
