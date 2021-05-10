@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from 
 import { UserRole } from "./user.interface";
 
 @Entity()
-export class UserEntity {
+export class User {
 
     @PrimaryGeneratedColumn()
     id: number;

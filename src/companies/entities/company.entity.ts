@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import { User } from '../../user/models/user.entity'
+
 
 @Entity()
 export class Company {
@@ -48,4 +50,8 @@ export class Company {
     nullable: true,
   })
   instagram_url: string;
+
+  @ManyToMany(() => User)
+  @JoinTable()
+  users: User[];
 }
