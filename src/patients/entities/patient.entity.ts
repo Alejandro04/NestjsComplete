@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable } from "typeorm";
 import { Client } from '../../clients/entities/client.entity';
 import { Consult } from '../../consults/entities/consult.entity';
-
+import { Hairdressing } from '../../hairdressings/entities/hairdressing.entity';
 
 @Entity()
 export class Patient {
@@ -33,4 +33,8 @@ export class Patient {
   @ManyToMany(() => Consult)
   @JoinTable()
   consults: Consult[];
+
+  @ManyToMany(() => Hairdressing)
+  @JoinTable()
+  hairdressings: Hairdressing[];
 }
