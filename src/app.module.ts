@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -8,9 +7,8 @@ import { AppService } from './app.service';
 import { CompaniesModule } from './companies/companies.module';
 import { ConsultsModule } from './consults/consults.module';
 import { ClientsModule } from './clients/clients.module';
-import { HairdresingsModule } from './hairdressings/hairdresings.module';
-import { PatientsModule } from './patients/patients.module';
 import { HairdressingsModule } from './hairdressings/hairdressings.module';
+import { PatientsModule } from './patients/patients.module';
 
 @Module({
   imports: [
@@ -24,15 +22,13 @@ import { HairdressingsModule } from './hairdressings/hairdressings.module';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false
     }),
-    TasksModule,
     AuthModule,
     UserModule,
     CompaniesModule,
     ConsultsModule,
     ClientsModule,
-    HairdresingsModule,
-    PatientsModule,
-    HairdressingsModule
+    HairdressingsModule,
+    PatientsModule
   ],
   controllers: [AppController],
   providers: [AppService],
