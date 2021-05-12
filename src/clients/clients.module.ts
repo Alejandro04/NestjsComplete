@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-//import { CategoriesService } from './services/categories.service';
+import { ClientService } from './services/clients.services';
 import { ClientsController } from './controllers/clients.controller';
 import { Client } from './entities/client.entity';
 
@@ -8,7 +8,7 @@ import { Client } from './entities/client.entity';
   imports: [
     TypeOrmModule.forFeature([Client])
   ],
-  providers: [],
+  providers: [ClientService],
   controllers: [ClientsController]
 })
 export class ClientsModule {}

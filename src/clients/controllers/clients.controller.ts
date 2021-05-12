@@ -1,14 +1,16 @@
 import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { ClientService } from '../services/clients.services';
 import { Client } from '../entities/client.entity';
 
 @Controller('clients')
 export class ClientsController {
+  constructor(private readonly clientService: ClientService) {}
 
-  @UseGuards(JwtAuthGuard)
+ // @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
-    return "ok";
+    return this.clientService.findAll();
   }
 
   @UseGuards(JwtAuthGuard)
