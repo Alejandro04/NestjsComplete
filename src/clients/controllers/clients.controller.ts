@@ -1,30 +1,36 @@
-import { Controller, Get, Post, Patch, Delete, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { Client } from '../entities/client.entity';
 
 @Controller('clients')
 export class ClientsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  getClients(@Request() req) {
+  findAll() {
     return "ok";
   }
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  postClients(@Request() req) {
+  create(@Body() client: Client) {
     return "Ok";
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Patch()
-  putClients(@Request() req) {
-    return req.user;
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    //return this.usersService.findOne(+id);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete()
-  deleteClients(@Request() req) {
-    return req.user;
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() client: Client) {
+   // return this.usersService.update(+id, updateUserDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    //return this.usersService.remove(+id);
   }
 }
