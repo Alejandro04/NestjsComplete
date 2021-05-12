@@ -7,32 +7,32 @@ import { Client } from '../entities/client.entity';
 export class ClientsController {
   constructor(private readonly clientService: ClientService) {}
 
- // @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.clientService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() client: Client) {
-    return "Ok";
+    return this.clientService.create(client);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     //return this.usersService.findOne(+id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() client: Client) {
-   // return this.usersService.update(+id, updateUserDto);
+  update(@Param('id') id: number, @Body() client: Client) {
+    return this.clientService.update(id, client);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    //return this.usersService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.clientService.remove(id);
   }
 }

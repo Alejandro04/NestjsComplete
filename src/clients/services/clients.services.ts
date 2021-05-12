@@ -12,4 +12,12 @@ export class ClientService {
   create(client: Client) {
     this.clients.push(client);
   }
+
+  update(id:number, client:Client){
+   // 
+  }
+
+  remove(id: number){
+    //
+  }
 }
