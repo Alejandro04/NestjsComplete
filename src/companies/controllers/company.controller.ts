@@ -9,14 +9,25 @@ export class CompanyController {
 
   //@UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.companyService.findAll();
+  async findAll() {
+    return await this.companyService.findAll();
   }
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() company: Company) {
-    return this.companyService.create(company);
+  async create(@Body() company: Company) {
+    return await this.companyService.create(company);
+  }
+  
+  //@UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  async update(@Param('id') id: number, @Body() company: Company) {
+    return await this.companyService.update(id, company);
   }
 
+  //@UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    return await this.companyService.remove(id);
+  }
 }
