@@ -9,30 +9,30 @@ export class ClientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.clientService.findAll();
+  async findAll() {
+    await this.clientService.findAll();
   }
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() client: Client) {
-    return this.clientService.create(client);
+  async create(@Body() client: Client) {
+    await this.clientService.create(client);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    //return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    //await this.usersService.findOne(+id);
   }
 
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: number, @Body() client: Client) {
-    return this.clientService.update(id, client);
+  async update(@Param('id') id: number, @Body() client: Client) {
+    await this.clientService.update(id, client);
   }
 
   //@UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.clientService.remove(id);
+  async remove(@Param('id') id: number) {
+    await this.clientService.remove(id);
   }
 }
