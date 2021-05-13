@@ -10,14 +10,13 @@ export class ClientsController {
   //@UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
-    const clients = await this.clientService.findAll();
-    return clients;
+    return await this.clientService.findAll();
   }
 
   //@UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() client: Client) {
-    await this.clientService.create(client);
+    return await this.clientService.create(client);
   }
 
   @Get(':id')

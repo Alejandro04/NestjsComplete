@@ -6,13 +6,14 @@ import { Client } from '../entities/client.entity';
 @Injectable()
 export class ClientService {
   constructor(@InjectRepository(Client) public clientRepo: Repository<Client>) {}
-  
-  findAll(): Promise<Client[]> {
+  private readonly clients: Client[] = [];
+
+  public async findAll() {
     return this.clientRepo.find();
   }
 
-  create(client: Client) {
-    this.clientRepo.insert(client)
+  public async create(client: Client) {
+    return await this.clientRepo.save(client);
   }
 
   update(id:number, client:Client){
