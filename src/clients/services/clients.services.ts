@@ -5,22 +5,39 @@ import { Client } from '../entities/client.entity';
 
 @Injectable()
 export class ClientService {
-  constructor(@InjectRepository(Client) public clientRepo: Repository<Client>) {}
-  private readonly clients: Client[] = [];
+  constructor(@InjectRepository(Client) private clientRepo: Repository<Client>) { }
 
   public async findAll() {
-    return this.clientRepo.find();
+    try {
+      return await this.clientRepo.find();
+    } catch (error) {
+      return error;
+    }
   }
 
   public async create(client: Client) {
-    return await this.clientRepo.save(client);
+    try {
+      return await this.clientRepo.save(client);
+    } catch (error) {
+      return error;
+    }
   }
 
-  update(id:number, client:Client){
-    this.clientRepo.update(id, client);
+  public async update(id: number, client: Client) {
+    try {
+      await this.clientRepo.update(id, client)
+      const clientUpdated = this.clientRepo.findOne(id)
+      return clientUpdated;
+    } catch (error) {
+      return error;
+    }
   }
 
-  remove(id: number){
-    this.clientRepo.delete(id);
+  public async remove(id: number) {
+    try {
+      return await this.clientRepo.delete(id);
+    } catch (error) {
+      return error;
+    }
   }
 }

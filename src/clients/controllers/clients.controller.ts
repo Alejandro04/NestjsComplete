@@ -18,21 +18,16 @@ export class ClientsController {
   async create(@Body() client: Client) {
     return await this.clientService.create(client);
   }
-
-  @Get(':id')
-  async findOne(@Param('id') id: number) {
-    //await this.usersService.findOne(+id);
-  }
-
+  
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(@Param('id') id: number, @Body() client: Client) {
-    await this.clientService.update(id, client);
+    return await this.clientService.update(id, client);
   }
 
   //@UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    await this.clientService.remove(id);
+    return await this.clientService.remove(id);
   }
 }
