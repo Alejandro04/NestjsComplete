@@ -10,7 +10,8 @@ export class ClientsController {
   //@UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
-    await this.clientService.findAll();
+    const clients = await this.clientService.findAll();
+    return clients;
   }
 
   //@UseGuards(JwtAuthGuard)

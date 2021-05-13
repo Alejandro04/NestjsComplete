@@ -5,7 +5,7 @@ import { Client } from '../entities/client.entity';
 
 @Injectable()
 export class ClientService {
-  constructor(@InjectRepository(Client) private clientRepo: Repository<Client>) {}
+  constructor(@InjectRepository(Client) public clientRepo: Repository<Client>) {}
   
   findAll(): Promise<Client[]> {
     return this.clientRepo.find();
@@ -16,10 +16,10 @@ export class ClientService {
   }
 
   update(id:number, client:Client){
-   // 
+    this.clientRepo.update(id, client);
   }
 
   remove(id: number){
-    //
+    this.clientRepo.delete(id);
   }
 }
