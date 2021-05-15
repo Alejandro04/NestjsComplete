@@ -3,7 +3,7 @@ import { UserRole } from "./user.interface";
 import { Company } from "../../companies/entities/company.entity";
 
 @Entity()
-export class User {
+export class Users {
 
     @PrimaryGeneratedColumn()
     id: number;

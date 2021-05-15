@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from "typeorm";
-import { User } from '../../user/models/user.entity';
+import { Users } from '../../user/models/user.entity';
 import { Client } from '../../clients/entities/client.entity';
 
 @Entity()
@@ -51,9 +51,9 @@ export class Company {
   })
   instagram_url: string;
 
-  @ManyToMany(type => User, user => user.companies)
+  @ManyToMany(type => Users, user => user.companies)
   @JoinTable()
-  users: User[];
+  users: Users[];
 
   @OneToMany(() => Client, client => client.company)
   clients: Client[];
