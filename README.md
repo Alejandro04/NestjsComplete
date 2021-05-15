@@ -1,3 +1,7 @@
+### 0. Docu Relations CRUD
+https://wanago.io/2020/06/22/api-nestjs-relationships-postgres-typeorm/
+
+
 ### 1. Create project
 ```bash
 npm i -g @nestjs/cli
