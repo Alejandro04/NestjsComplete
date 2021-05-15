@@ -51,7 +51,7 @@ export class Company {
   })
   instagram_url: string;
 
-  @ManyToMany(() => User)
+  @ManyToMany(type => User, user => user.companies)
   @JoinTable()
   users: User[];
 

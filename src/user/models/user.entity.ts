@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, ManyToMany } from "typeorm";
 import { UserRole } from "./user.interface";
+import { Company } from "../../companies/entities/company.entity";
 
 @Entity()
 export class User {
@@ -29,4 +30,7 @@ export class User {
     emailToLowerCase() {
         this.email = this.email.toLowerCase();
     }
+
+    @ManyToMany(type => Company, company => company.users)
+    companies: Company[];
 }
