@@ -9,7 +9,7 @@ export class PatientService {
 
   public async findAll() {
     try {
-      return await this.patientRepo.find();
+      return await this.patientRepo.find({ relations: ['client'] });
     } catch (error) {
       return error;
     }

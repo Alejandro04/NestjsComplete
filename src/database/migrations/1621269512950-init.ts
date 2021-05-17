@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class init1621264839609 implements MigrationInterface {
-    name = 'init1621264839609'
+export class init1621269512950 implements MigrationInterface {
+    name = 'init1621269512950'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TYPE "users_role_enum" AS ENUM('admin', 'user')`);
@@ -9,7 +9,7 @@ export class init1621264839609 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "company" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "country" character varying, "phone1" character varying, "phone2" character varying, "email" character varying, "plan" character varying, "facebook_url" character varying, "twitter_url" character varying, "instagram_url" character varying, CONSTRAINT "PK_056f7854a7afdba7cbd6d45fc20" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "consult" ("id" SERIAL NOT NULL, "date" TIMESTAMP NOT NULL, "reason" character varying NOT NULL, "datail" character varying NOT NULL, CONSTRAINT "PK_5df94cf2cba21cfd42805ea5ccb" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "hairdressing" ("id" SERIAL NOT NULL, "date" TIMESTAMP NOT NULL, "reason" character varying NOT NULL, "datail" character varying NOT NULL, CONSTRAINT "PK_54bd39d115955cc6e94770731e2" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "patient" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "breed" character varying NOT NULL, "weight" character varying NOT NULL, "age" character varying NOT NULL, "sex" character varying NOT NULL, "species" character varying NOT NULL, "clientId" integer, CONSTRAINT "PK_8dfa510bb29ad31ab2139fbfb99" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "patient" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "breed" character varying NOT NULL, "weight" character varying NOT NULL, "age" character varying NOT NULL, "sex" character varying NOT NULL, "species" character varying NOT NULL, "clientId" integer NOT NULL, CONSTRAINT "PK_8dfa510bb29ad31ab2139fbfb99" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "client" ("id" SERIAL NOT NULL, "first_name" character varying NOT NULL, "last_name" character varying NOT NULL, "dni" character varying NOT NULL, "phone1" character varying, "phone2" character varying, "companyId" integer NOT NULL, CONSTRAINT "PK_96da49381769303a6515a8785c7" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "company_users_users" ("companyId" integer NOT NULL, "usersId" integer NOT NULL, CONSTRAINT "PK_f5c92ef89a49984143f37b67455" PRIMARY KEY ("companyId", "usersId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_8ec948dfb19096ed9ac739ada3" ON "company_users_users" ("companyId") `);

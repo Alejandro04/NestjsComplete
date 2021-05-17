@@ -27,6 +27,10 @@ export class Patient {
   @Column()
   species: string;
 
+  /*FK: Creo la columna primero y luego aplico la relacion*/
+  @Column()
+  clientId: string;
+
   @ManyToOne(() => Client, client => client.patients)
   client: Client;
 
