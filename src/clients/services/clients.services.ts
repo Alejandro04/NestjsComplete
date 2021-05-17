@@ -9,7 +9,7 @@ export class ClientService {
 
   public async findAll() {
     try {
-      return await this.clientRepo.find();
+      return await this.clientRepo.find({ relations: ['company'] });
     } catch (error) {
       return error;
     }

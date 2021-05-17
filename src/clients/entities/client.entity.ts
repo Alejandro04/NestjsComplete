@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinTable } from "typeorm";
 import { Company } from '../../companies/entities/company.entity';
 import { Patient } from '../../patients/entities/patient.entity';
 
@@ -26,6 +26,10 @@ export class Client {
     nullable: true,
   })
   phone2: string;
+
+  /*FK: Creo la columna primero y luego aplico la relacion*/
+  @Column()
+  companyId: string;
 
   @ManyToOne(() => Company, company => company.clients)
   company: Company;
