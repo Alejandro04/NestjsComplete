@@ -37,7 +37,6 @@ export class Patient {
   @ManyToMany(type => Consult, consult => consult.patients)
   consults: Consult[];
 
-  @ManyToMany(() => Hairdressing)
-  @JoinTable()
+  @ManyToMany(type => Hairdressing, hairdressing => hairdressing.patients)
   hairdressings: Hairdressing[];
 }

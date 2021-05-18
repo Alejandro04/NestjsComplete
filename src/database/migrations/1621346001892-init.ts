@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class init1621345473519 implements MigrationInterface {
-    name = 'init1621345473519'
+export class init1621346001892 implements MigrationInterface {
+    name = 'init1621346001892'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TYPE "users_role_enum" AS ENUM('admin', 'user')`);
@@ -17,31 +17,31 @@ export class init1621345473519 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "consult_patients_patient" ("consultId" integer NOT NULL, "patientId" integer NOT NULL, CONSTRAINT "PK_00a77f92b812f2252bc2ce01e4b" PRIMARY KEY ("consultId", "patientId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_13f655fdda75be9c71235a4a11" ON "consult_patients_patient" ("consultId") `);
         await queryRunner.query(`CREATE INDEX "IDX_5df161eba6e335d39a94e5fcbb" ON "consult_patients_patient" ("patientId") `);
-        await queryRunner.query(`CREATE TABLE "patient_hairdressings_hairdressing" ("patientId" integer NOT NULL, "hairdressingId" integer NOT NULL, CONSTRAINT "PK_3c97cc9b52b9959a794d9fa74fc" PRIMARY KEY ("patientId", "hairdressingId"))`);
-        await queryRunner.query(`CREATE INDEX "IDX_430b557cdb58ac5fa63f7210b6" ON "patient_hairdressings_hairdressing" ("patientId") `);
-        await queryRunner.query(`CREATE INDEX "IDX_82129cfea0d92b2b120bfe1310" ON "patient_hairdressings_hairdressing" ("hairdressingId") `);
+        await queryRunner.query(`CREATE TABLE "hairdressing_patients_patient" ("hairdressingId" integer NOT NULL, "patientId" integer NOT NULL, CONSTRAINT "PK_2402d8a4c525621624f46cef5d6" PRIMARY KEY ("hairdressingId", "patientId"))`);
+        await queryRunner.query(`CREATE INDEX "IDX_840b90f10838023cf5e442c2eb" ON "hairdressing_patients_patient" ("hairdressingId") `);
+        await queryRunner.query(`CREATE INDEX "IDX_64d64a66a9d818774679957f5a" ON "hairdressing_patients_patient" ("patientId") `);
         await queryRunner.query(`ALTER TABLE "patient" ADD CONSTRAINT "FK_1aea8c858848a3eda3a3f27ee72" FOREIGN KEY ("clientId") REFERENCES "client"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "client" ADD CONSTRAINT "FK_3d7a0b6e0f1d0c0ab1bc189645f" FOREIGN KEY ("companyId") REFERENCES "company"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "company_users_users" ADD CONSTRAINT "FK_8ec948dfb19096ed9ac739ada36" FOREIGN KEY ("companyId") REFERENCES "company"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "company_users_users" ADD CONSTRAINT "FK_e200d0a39f6ea44b345f6e1ff54" FOREIGN KEY ("usersId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "consult_patients_patient" ADD CONSTRAINT "FK_13f655fdda75be9c71235a4a111" FOREIGN KEY ("consultId") REFERENCES "consult"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "consult_patients_patient" ADD CONSTRAINT "FK_5df161eba6e335d39a94e5fcbb7" FOREIGN KEY ("patientId") REFERENCES "patient"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "patient_hairdressings_hairdressing" ADD CONSTRAINT "FK_430b557cdb58ac5fa63f7210b62" FOREIGN KEY ("patientId") REFERENCES "patient"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "patient_hairdressings_hairdressing" ADD CONSTRAINT "FK_82129cfea0d92b2b120bfe13103" FOREIGN KEY ("hairdressingId") REFERENCES "hairdressing"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "hairdressing_patients_patient" ADD CONSTRAINT "FK_840b90f10838023cf5e442c2eb4" FOREIGN KEY ("hairdressingId") REFERENCES "hairdressing"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "hairdressing_patients_patient" ADD CONSTRAINT "FK_64d64a66a9d818774679957f5a6" FOREIGN KEY ("patientId") REFERENCES "patient"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`ALTER TABLE "patient_hairdressings_hairdressing" DROP CONSTRAINT "FK_82129cfea0d92b2b120bfe13103"`);
-        await queryRunner.query(`ALTER TABLE "patient_hairdressings_hairdressing" DROP CONSTRAINT "FK_430b557cdb58ac5fa63f7210b62"`);
+        await queryRunner.query(`ALTER TABLE "hairdressing_patients_patient" DROP CONSTRAINT "FK_64d64a66a9d818774679957f5a6"`);
+        await queryRunner.query(`ALTER TABLE "hairdressing_patients_patient" DROP CONSTRAINT "FK_840b90f10838023cf5e442c2eb4"`);
         await queryRunner.query(`ALTER TABLE "consult_patients_patient" DROP CONSTRAINT "FK_5df161eba6e335d39a94e5fcbb7"`);
         await queryRunner.query(`ALTER TABLE "consult_patients_patient" DROP CONSTRAINT "FK_13f655fdda75be9c71235a4a111"`);
         await queryRunner.query(`ALTER TABLE "company_users_users" DROP CONSTRAINT "FK_e200d0a39f6ea44b345f6e1ff54"`);
         await queryRunner.query(`ALTER TABLE "company_users_users" DROP CONSTRAINT "FK_8ec948dfb19096ed9ac739ada36"`);
         await queryRunner.query(`ALTER TABLE "client" DROP CONSTRAINT "FK_3d7a0b6e0f1d0c0ab1bc189645f"`);
         await queryRunner.query(`ALTER TABLE "patient" DROP CONSTRAINT "FK_1aea8c858848a3eda3a3f27ee72"`);
-        await queryRunner.query(`DROP INDEX "IDX_82129cfea0d92b2b120bfe1310"`);
-        await queryRunner.query(`DROP INDEX "IDX_430b557cdb58ac5fa63f7210b6"`);
-        await queryRunner.query(`DROP TABLE "patient_hairdressings_hairdressing"`);
+        await queryRunner.query(`DROP INDEX "IDX_64d64a66a9d818774679957f5a"`);
+        await queryRunner.query(`DROP INDEX "IDX_840b90f10838023cf5e442c2eb"`);
+        await queryRunner.query(`DROP TABLE "hairdressing_patients_patient"`);
         await queryRunner.query(`DROP INDEX "IDX_5df161eba6e335d39a94e5fcbb"`);
         await queryRunner.query(`DROP INDEX "IDX_13f655fdda75be9c71235a4a11"`);
         await queryRunner.query(`DROP TABLE "consult_patients_patient"`);

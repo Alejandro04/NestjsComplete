@@ -9,7 +9,7 @@ export class HairdressingServices {
 
   public async findAll() {
     try {
-      return await this.hairdressingRepo.find();
+      return await this.hairdressingRepo.find({ relations: ['patients'] });
     } catch (error) {
       return error;
     }

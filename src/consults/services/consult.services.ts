@@ -9,7 +9,7 @@ export class ConsultServices {
 
   public async findAll() {
     try {
-      return await this.consultRepo.find();
+      return await this.consultRepo.find({ relations: ['patients'] });
     } catch (error) {
       return error;
     }
