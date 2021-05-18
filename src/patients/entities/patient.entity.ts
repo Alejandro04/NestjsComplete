@@ -34,8 +34,7 @@ export class Patient {
   @ManyToOne(() => Client, client => client.patients)
   client: Client;
 
-  @ManyToMany(() => Consult)
-  @JoinTable()
+  @ManyToMany(type => Consult, consult => consult.patients)
   consults: Consult[];
 
   @ManyToMany(() => Hairdressing)
