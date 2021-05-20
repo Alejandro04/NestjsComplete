@@ -1,3 +1,4 @@
+import { ClientInterface } from './../entities/client.interface';
 import { INestApplication } from '@nestjs/common';
 import { ClientsController } from './clients.controller';
 import { ClientService } from '../services/clients.services';
@@ -11,10 +12,8 @@ describe('ClientsController', () => {
   let controller: ClientsController;
   const mockClientService = {
     create: jest.fn(dto => {
-      return {
-        id: Date.now(),
-        ...dto
-      }
+      console.log("dto", dto)
+      return dto
     })
   }
 
@@ -45,25 +44,21 @@ describe('ClientsController', () => {
     expect(controller).toBeDefined();
   });
 
-  /*
-  falla porque el entity devuelve una promesa, ver como resolver
   it('Should create a client', () => {
-    expect(controller.create({
-      first_name: 'Alejandro',
-      last_name: 'Roa',
-      dni: '121212'
-    })).toEqual({
-      id: expect.any(Number),
-      first_name: 'Alejandro',
-      last_name: 'Roa',
-      dni: '121212'
+    let client = {
+      companyId: 1,
+      first_name: 'A',
+      last_name: 'B',
+      dni: '1212'
+    }
+    expect(controller.create(client)).toEqual({
+      companyId: 1,
+      first_name: 'A',
+      last_name: 'B',
+      dni: '1212',
+      id: 2
     })
+  })
 
-  min 13 del  video https://www.youtube.com/watch?v=dXOfOgFFKuY
-  it('Should create a client', () => {
-    expect(mockClientService.create).toHaveBeenCalled();
-  });
-  });
-  */
 });
 

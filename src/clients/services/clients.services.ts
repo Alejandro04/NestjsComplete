@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Client } from '../entities/client.entity';
+import { ClientInterface } from '../entities/client.interface';
 
 @Injectable()
 export class ClientService {
@@ -15,7 +16,7 @@ export class ClientService {
     }
   }
 
-  public async create(client: Client) {
+  public async create(client: ClientInterface) {
     try {
       return await this.clientRepo.save(client);
     } catch (error) {

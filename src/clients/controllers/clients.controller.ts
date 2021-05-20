@@ -2,6 +2,7 @@ import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body }
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ClientService } from '../services/clients.services';
 import { Client } from '../entities/client.entity';
+import { ClientInterface } from '../entities/client.interface';
 
 @Controller('clients')
 export class ClientsController {
@@ -15,7 +16,7 @@ export class ClientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() client: Client) {
+  async create(@Body() client: ClientInterface) {
     return await this.clientService.create(client);
   }
   
