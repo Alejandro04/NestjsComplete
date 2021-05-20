@@ -8,21 +8,34 @@ import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
 
 describe('ClientsController', () => {
-  let clientsController: ClientsController;
-  let clientService: ClientService;
+  let controller: ClientsController;
+  const mockClientService = {}
 
-  beforeEach(() => {
-    let clientRepo: Repository<Client>
-    clientService = new ClientService(clientRepo);
-    clientsController = new ClientsController(clientService);
+  beforeEach(async () => {
+    const moduleRef = await Test.createTestingModule({
+        controllers: [ClientsController],
+        providers: [ClientService],
+      })
+      .overrideProvider(ClientService)
+      .useValue(mockClientService)
+      .compile();
+      
+    controller = moduleRef.get<ClientsController>(ClientsController);
   });
 
+  /*
   describe('findAll', () => {
-    it('should return an array of clients', async () => {
-      const result = [{}];
+    it('should return an array of cats', async () => {
+      const result = ['test'];
       jest.spyOn(clientService, 'findAll').mockImplementation(() => result);
 
       expect(await clientsController.findAll()).toBe(result);
     });
   });
+  */
+
+  it('Should be defined', () => {
+    expect(controller).toBeDefined();
+  });
 });
+
