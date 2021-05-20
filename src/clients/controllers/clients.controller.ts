@@ -16,7 +16,8 @@ export class ClientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() client: ClientInterface) {
+  async create(@Body() client: Client) {
+    console.log("client es", client)
     return await this.clientService.create(client);
   }
   

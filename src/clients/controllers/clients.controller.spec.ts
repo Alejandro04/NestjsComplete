@@ -11,11 +11,9 @@ import { Client } from '../entities/client.entity';
 describe('ClientsController', () => {
   let controller: ClientsController;
   const mockClientService = {
-    create: jest.fn(client => {
-      return {
-        ...client
-      }
-    })
+    first_name: 'A',
+    last_name: 'B',
+    dni: '1212'
   }
 
   beforeEach(async () => {
@@ -46,20 +44,14 @@ describe('ClientsController', () => {
   });
 
   it('Should create a client', () => {
-    let client = {
-      first_name: 'A',
-      last_name: 'B',
-      dni: '1212'
-    }
-    expect(controller.create(client)).toEqual({
-      id: expect.any(Number),
-      first_name: client.first_name,
-      last_name: client.last_name,
-      dni: client.dni
-    })
+    let client: Client;
+    expect(controller.create(client)).toBe(mockClientService)
 
    //expect(mockClientService.create).toHaveBeenCalledWith(client)
   })
 
+
+  // ENTONCES AL PARECER LA FORMA EN COMO ESCRIBI LAS FUNCIONALIDADES INJECTANDO LA ENTIDAD
+  // COMO TYPE NO PERMITE TESTEAR BIEN
 });
 
