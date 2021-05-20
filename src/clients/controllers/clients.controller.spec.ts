@@ -9,7 +9,14 @@ import { Client } from '../entities/client.entity';
 
 describe('ClientsController', () => {
   let controller: ClientsController;
-  const mockClientService = {}
+  const mockClientService = {
+    create: jest.fn(dto => {
+      return {
+        id: Date.now(),
+        ...dto
+      }
+    })
+  }
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -19,7 +26,7 @@ describe('ClientsController', () => {
       .overrideProvider(ClientService)
       .useValue(mockClientService)
       .compile();
-      
+
     controller = moduleRef.get<ClientsController>(ClientsController);
   });
 
@@ -37,5 +44,21 @@ describe('ClientsController', () => {
   it('Should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  /*
+  falla porque el entity devuelve una promesa, ver como resolver
+  it('Should create a client', () => {
+    expect(controller.create({
+      first_name: 'Alejandro',
+      last_name: 'Roa',
+      dni: '121212'
+    })).toEqual({
+      id: expect.any(Number),
+      first_name: 'Alejandro',
+      last_name: 'Roa',
+      dni: '121212'
+    })
+  });
+  */
 });
 
