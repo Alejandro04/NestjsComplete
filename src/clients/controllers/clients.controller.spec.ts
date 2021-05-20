@@ -4,33 +4,25 @@ import { ClientService } from '../services/clients.services';
 import { ClientsModule } from '../clients.module';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
+import { Repository } from 'typeorm';
+import { Client } from '../entities/client.entity';
 
-describe('Clients', () => {
-    let app: INestApplication;
-    let clientService = { findAll: () => ['test'] };
-  
-    beforeAll(async () => {
-      const moduleRef = await Test.createTestingModule({
-        imports: [ClientsModule],
-      })
-        .overrideProvider(ClientService)
-        .useValue(clientService)
-        .compile();
-  
-      app = moduleRef.createNestApplication();
-      await app.init();
-    });
-  
-    it(`/GET clients`, () => {
-      return request(app.getHttpServer())
-        .get('/clients')
-        .expect(200)
-        .expect({
-          data: clientService.findAll(),
-        });
-    });
-  
-    afterAll(async () => {
-      await app.close();
+describe('ClientsController', () => {
+  let clientsController: ClientsController;
+  let clientService: ClientService;
+
+  beforeEach(() => {
+    let clientRepo: Repository<Client>
+    clientService = new ClientService(clientRepo);
+    clientsController = new ClientsController(clientService);
+  });
+
+  describe('findAll', () => {
+    it('should return an array of clients', async () => {
+      const result = [{}];
+      jest.spyOn(clientService, 'findAll').mockImplementation(() => result);
+
+      expect(await clientsController.findAll()).toBe(result);
     });
   });
+});
