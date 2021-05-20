@@ -11,9 +11,10 @@ import { Client } from '../entities/client.entity';
 describe('ClientsController', () => {
   let controller: ClientsController;
   const mockClientService = {
-    create: jest.fn(dto => {
-      console.log("dto", dto)
-      return dto
+    create: jest.fn(client => {
+      return {
+        ...client
+      }
     })
   }
 
@@ -46,18 +47,18 @@ describe('ClientsController', () => {
 
   it('Should create a client', () => {
     let client = {
-      companyId: 1,
       first_name: 'A',
       last_name: 'B',
       dni: '1212'
     }
     expect(controller.create(client)).toEqual({
-      companyId: 1,
-      first_name: 'A',
-      last_name: 'B',
-      dni: '1212',
-      id: 2
+      id: expect.any(Number),
+      first_name: client.first_name,
+      last_name: client.last_name,
+      dni: client.dni
     })
+
+   //expect(mockClientService.create).toHaveBeenCalledWith(client)
   })
 
 });
