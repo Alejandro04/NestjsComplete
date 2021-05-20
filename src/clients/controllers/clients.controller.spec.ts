@@ -20,9 +20,9 @@ describe('ClientsController', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-        controllers: [ClientsController],
-        providers: [ClientService],
-      })
+      controllers: [ClientsController],
+      providers: [ClientService],
+    })
       .overrideProvider(ClientService)
       .useValue(mockClientService)
       .compile();
@@ -58,6 +58,11 @@ describe('ClientsController', () => {
       last_name: 'Roa',
       dni: '121212'
     })
+
+  min 13 del  video https://www.youtube.com/watch?v=dXOfOgFFKuY
+  it('Should create a client', () => {
+    expect(mockClientService.create).toHaveBeenCalled();
+  });
   });
   */
 });
