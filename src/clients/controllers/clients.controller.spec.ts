@@ -8,15 +8,110 @@ import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
 
+class ApiServiceMock {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  findAll() {
+    return [
+      {
+        "id": 1,
+        "first_name": "asasasasa",
+        "last_name": "roa",
+        "dni": "121212",
+        "phone1": null,
+        "phone2": null,
+        "companyId": 1,
+        "company": {
+          "id": 1,
+          "name": "Company 2",
+          "country": null,
+          "phone1": null,
+          "phone2": null,
+          "email": null,
+          "plan": null,
+          "facebook_url": null,
+          "twitter_url": null,
+          "instagram_url": null
+        }
+      },
+      {
+        "id": 2,
+        "first_name": "asasasasa",
+        "last_name": "roa",
+        "dni": "121212",
+        "phone1": null,
+        "phone2": null,
+        "companyId": 1,
+        "company": {
+          "id": 1,
+          "name": "Company 2",
+          "country": null,
+          "phone1": null,
+          "phone2": null,
+          "email": null,
+          "plan": null,
+          "facebook_url": null,
+          "twitter_url": null,
+          "instagram_url": null
+        }
+      },
+      {
+        "id": 3,
+        "first_name": "asasasasa",
+        "last_name": "roa",
+        "dni": "121212",
+        "phone1": null,
+        "phone2": null,
+        "companyId": 1,
+        "company": {
+          "id": 1,
+          "name": "Company 2",
+          "country": null,
+          "phone1": null,
+          "phone2": null,
+          "email": null,
+          "plan": null,
+          "facebook_url": null,
+          "twitter_url": null,
+          "instagram_url": null
+        }
+      },
+      {
+        "id": 4,
+        "first_name": "asasasasa",
+        "last_name": "roa",
+        "dni": "121212",
+        "phone1": null,
+        "phone2": null,
+        "companyId": 1,
+        "company": {
+          "id": 1,
+          "name": "Company 2",
+          "country": null,
+          "phone1": null,
+          "phone2": null,
+          "email": null,
+          "plan": null,
+          "facebook_url": null,
+          "twitter_url": null,
+          "instagram_url": null
+        }
+      }
+    ]
+  }
+}
 
 describe('ClientsController', () => {
   let controller: ClientsController;
   let service: ClientService;
 
   beforeEach(async () => {
+    const ApiServiceProvider = {
+      provide: ClientService,
+      useClass: ApiServiceMock,
+    };
     const moduleRef = await Test.createTestingModule({
       controllers: [ClientsController],
-      providers: [ClientService],
+      providers: [ClientService, ApiServiceProvider],
     }).compile();
 
       controller = moduleRef.get<ClientsController>(ClientsController);
@@ -27,8 +122,8 @@ describe('ClientsController', () => {
     expect(service).toBeDefined();
   });
 
-  describe('getGpa', () => {
-    it('should get student GPA', async () => {
+  describe('findAll', () => {
+    it('should get array of clients', async () => {
       const expectedClients = [
         {
           "id": 1,
@@ -115,18 +210,11 @@ describe('ClientsController', () => {
           }
         }
       ]
-      const clients = await controller.findAll()
+      const clients = await service.findAll()
       expect(clients).toEqual(expectedClients);
     });
   });
 
-  describe('findAll', () => {
-    it('should return clients', async () => {
-      controller.findAll()
-      expect(service.findAll()).toHaveBeenCalled();
-    });
-  });
-  
 
   /*
   it('Should be defined', () => {
