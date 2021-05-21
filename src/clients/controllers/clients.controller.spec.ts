@@ -236,13 +236,9 @@ describe('ClientsController', () => {
     });
   });
 
-
-  /*
-  it('Should be defined', () => {
+  it('Should be defined controller', () => {
     expect(controller).toBeDefined();
   });
-    */
-
 
   // ENTONCES AL PARECER LA FORMA EN COMO ESCRIBI LAS FUNCIONALIDADES INJECTANDO LA ENTIDAD
   // COMO TYPE NO PERMITE TESTEAR BIEN
