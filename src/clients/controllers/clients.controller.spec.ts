@@ -8,6 +8,7 @@ import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
 import { Body } from '@nestjs/common';
+import MockDataClients from './mockdataclients.json';
 
 class ApiServiceMock {
 
@@ -20,92 +21,7 @@ class ApiServiceMock {
   }
 
   findAll() {
-    return [
-      {
-        "id": 1,
-        "first_name": "asasasasa",
-        "last_name": "roa",
-        "dni": "121212",
-        "phone1": null,
-        "phone2": null,
-        "companyId": 1,
-        "company": {
-          "id": 1,
-          "name": "Company 2",
-          "country": null,
-          "phone1": null,
-          "phone2": null,
-          "email": null,
-          "plan": null,
-          "facebook_url": null,
-          "twitter_url": null,
-          "instagram_url": null
-        }
-      },
-      {
-        "id": 2,
-        "first_name": "asasasasa",
-        "last_name": "roa",
-        "dni": "121212",
-        "phone1": null,
-        "phone2": null,
-        "companyId": 1,
-        "company": {
-          "id": 1,
-          "name": "Company 2",
-          "country": null,
-          "phone1": null,
-          "phone2": null,
-          "email": null,
-          "plan": null,
-          "facebook_url": null,
-          "twitter_url": null,
-          "instagram_url": null
-        }
-      },
-      {
-        "id": 3,
-        "first_name": "asasasasa",
-        "last_name": "roa",
-        "dni": "121212",
-        "phone1": null,
-        "phone2": null,
-        "companyId": 1,
-        "company": {
-          "id": 1,
-          "name": "Company 2",
-          "country": null,
-          "phone1": null,
-          "phone2": null,
-          "email": null,
-          "plan": null,
-          "facebook_url": null,
-          "twitter_url": null,
-          "instagram_url": null
-        }
-      },
-      {
-        "id": 4,
-        "first_name": "asasasasa",
-        "last_name": "roa",
-        "dni": "121212",
-        "phone1": null,
-        "phone2": null,
-        "companyId": 1,
-        "company": {
-          "id": 1,
-          "name": "Company 2",
-          "country": null,
-          "phone1": null,
-          "phone2": null,
-          "email": null,
-          "plan": null,
-          "facebook_url": null,
-          "twitter_url": null,
-          "instagram_url": null
-        }
-      }
-    ]
+    return MockDataClients
   }
 }
 
@@ -133,92 +49,7 @@ describe('ClientsController', () => {
 
   describe('findAll', () => {
     it('should get array of clients', async () => {
-      const expectedClients = [
-        {
-          "id": 1,
-          "first_name": "asasasasa",
-          "last_name": "roa",
-          "dni": "121212",
-          "phone1": null,
-          "phone2": null,
-          "companyId": 1,
-          "company": {
-            "id": 1,
-            "name": "Company 2",
-            "country": null,
-            "phone1": null,
-            "phone2": null,
-            "email": null,
-            "plan": null,
-            "facebook_url": null,
-            "twitter_url": null,
-            "instagram_url": null
-          }
-        },
-        {
-          "id": 2,
-          "first_name": "asasasasa",
-          "last_name": "roa",
-          "dni": "121212",
-          "phone1": null,
-          "phone2": null,
-          "companyId": 1,
-          "company": {
-            "id": 1,
-            "name": "Company 2",
-            "country": null,
-            "phone1": null,
-            "phone2": null,
-            "email": null,
-            "plan": null,
-            "facebook_url": null,
-            "twitter_url": null,
-            "instagram_url": null
-          }
-        },
-        {
-          "id": 3,
-          "first_name": "asasasasa",
-          "last_name": "roa",
-          "dni": "121212",
-          "phone1": null,
-          "phone2": null,
-          "companyId": 1,
-          "company": {
-            "id": 1,
-            "name": "Company 2",
-            "country": null,
-            "phone1": null,
-            "phone2": null,
-            "email": null,
-            "plan": null,
-            "facebook_url": null,
-            "twitter_url": null,
-            "instagram_url": null
-          }
-        },
-        {
-          "id": 4,
-          "first_name": "asasasasa",
-          "last_name": "roa",
-          "dni": "121212",
-          "phone1": null,
-          "phone2": null,
-          "companyId": 1,
-          "company": {
-            "id": 1,
-            "name": "Company 2",
-            "country": null,
-            "phone1": null,
-            "phone2": null,
-            "email": null,
-            "plan": null,
-            "facebook_url": null,
-            "twitter_url": null,
-            "instagram_url": null
-          }
-        }
-      ]
+      const expectedClients = MockDataClients
       const clients = await service.findAll()
       expect(clients).toEqual(expectedClients);
     });
@@ -240,7 +71,21 @@ describe('ClientsController', () => {
     expect(controller).toBeDefined();
   });
 
-  // ENTONCES AL PARECER LA FORMA EN COMO ESCRIBI LAS FUNCIONALIDADES INJECTANDO LA ENTIDAD
-  // COMO TYPE NO PERMITE TESTEAR BIEN
+  describe('Call clients service', () => {
+    it('should call get clients service', async () => {
+      controller.findAll()
+      expect(service.findAll())
+    });
+    it('should call create client service', async () => {
+      const expectedClient = {
+        first_name: 'Alejandro',
+        last_name: 'Roa',
+        dni: '12121212'
+      }
+      controller.create(expectedClient)
+      expect(service.create(expectedClient))
+    });
+  });
+
 });
 
