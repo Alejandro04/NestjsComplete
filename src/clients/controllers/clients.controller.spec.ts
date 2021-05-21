@@ -7,9 +7,18 @@ import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { Client } from '../entities/client.entity';
+import { Body } from '@nestjs/common';
 
 class ApiServiceMock {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  create(client: ClientInterface) {
+    return {
+      first_name: client.first_name,
+      last_name: client.last_name,
+      dni: client.dni
+    }
+  }
+
   findAll() {
     return [
       {
@@ -212,6 +221,18 @@ describe('ClientsController', () => {
       ]
       const clients = await service.findAll()
       expect(clients).toEqual(expectedClients);
+    });
+  });
+
+  describe('create', () => {
+    it('should create a client', async () => {
+      const expectedClient = {
+        first_name: 'Alejandro',
+        last_name: 'Roa',
+        dni: '12121212'
+      }
+      const client = await service.create(expectedClient)
+      expect(client).toEqual(expectedClient);
     });
   });
 

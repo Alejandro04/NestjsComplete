@@ -16,7 +16,7 @@ export class ClientService {
     }
   }
 
-  public async create(client: Client) {
+  public async create(client: ClientInterface) {
     try {
       return await this.clientRepo.save(client);
     } catch (error) {
