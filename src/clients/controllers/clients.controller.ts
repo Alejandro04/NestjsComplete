@@ -10,7 +10,7 @@ export class ClientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Get()
-  async findAll() {
+  async findAll(): Promise<Client[]> {
     return await this.clientService.findAll();
   }
 

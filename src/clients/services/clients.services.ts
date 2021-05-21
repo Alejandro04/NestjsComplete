@@ -8,7 +8,7 @@ import { ClientInterface } from '../entities/client.interface';
 export class ClientService {
   constructor(@InjectRepository(Client) private clientRepo: Repository<Client>) { }
 
-  public async findAll() {
+  public async findAll(): Promise<Client[]> {
     try {
       return await this.clientRepo.find({ relations: ['company'] });
     } catch (error) {
