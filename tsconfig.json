@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true  
+    "resolveJsonModule": false,
+    "esModuleInterop": false  
   }
 }

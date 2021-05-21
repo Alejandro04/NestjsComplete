@@ -1,13 +1,7 @@
 import { ClientInterface } from './../entities/client.interface';
-import { INestApplication } from '@nestjs/common';
 import { ClientsController } from './clients.controller';
 import { ClientService } from '../services/clients.services';
-import { ClientsModule } from '../clients.module';
 import { Test } from '@nestjs/testing';
-import * as request from 'supertest';
-import { Repository } from 'typeorm';
-import { Client } from '../entities/client.entity';
-import { Body } from '@nestjs/common';
 import MockDataClients from './mockdataclients.json';
 
 class ApiServiceMock {

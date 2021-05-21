@@ -8,7 +8,7 @@ import { ClientInterface } from '../entities/client.interface';
 export class ClientService {
   constructor(@InjectRepository(Client) private clientRepo: Repository<Client>) { }
 
-  public async findAll(): Promise<Client[]> {
+  public async findAll() {
     try {
       return await this.clientRepo.find({ relations: ['company'] });
     } catch (error) {
@@ -24,7 +24,7 @@ export class ClientService {
     }
   }
 
-  public async update(id: number, client: Client) {
+  public async update(id: number, client: ClientInterface) {
     try {
       await this.clientRepo.update(id, client)
       const clientUpdated = this.clientRepo.findOne(id)

@@ -10,7 +10,7 @@ export class ClientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<Client[]> {
+  async findAll() {
     return await this.clientService.findAll();
   }
 
@@ -22,7 +22,7 @@ export class ClientsController {
   
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() client: Client) {
+  async update(@Param('id') id: number, @Body() client: ClientInterface) {
     return await this.clientService.update(id, client);
   }
 
