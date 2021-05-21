@@ -1,3 +1,8 @@
+### 1. Notas Unit Test con Mock
+Sirve para definir entradas y salidas de llamadas en el momento de crear la prueba y la funcionalidad
+No sirven para mantener un control en el tiempo de las llamadas
+
+
 ### 0. Docu Relations CRUD
 https://wanago.io/2020/06/22/api-nestjs-relationships-postgres-typeorm/
 
