@@ -1,5 +1,5 @@
-import { ClientInterface } from './../entities/client.interface';
-import { ClientsController } from './clients.controller';
+import { ClientInterface } from '../entities/client.interface';
+import { ClientsController } from '../controllers/clients.controller';
 import { ClientService } from '../services/clients.services';
 import { Test } from '@nestjs/testing';
 import MockDataClients from './mockdataclients.json';
