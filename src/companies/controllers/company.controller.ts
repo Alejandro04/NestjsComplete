@@ -2,6 +2,7 @@ import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body }
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CompanyService } from '../services/company.services';
 import { Company } from '../entities/company.entity';
+import { CompanyInterface } from '../entities/company.interface';
 
 @Controller('companies')
 export class CompanyController {
@@ -15,13 +16,13 @@ export class CompanyController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() company: Company) {
+  async create(@Body() company: CompanyInterface) {
     return await this.companyService.create(company);
   }
   
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() company: Company) {
+  async update(@Param('id') id: number, @Body() company: CompanyInterface) {
     return await this.companyService.update(id, company);
   }
 
