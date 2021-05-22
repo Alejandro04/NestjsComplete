@@ -1,3 +1,8 @@
 export interface CompanyInterface {
-    name?: string;
+    name: string;
+    users: User;
+}
+
+interface User {
+    id: Number;
 }
