@@ -1,86 +1,46 @@
 [
-    {
-      "id": 1,
-      "first_name": "asasasasa",
-      "last_name": "roa",
-      "dni": "121212",
-      "phone1": null,
-      "phone2": null,
-      "companyId": 1,
-      "company": {
+  {
+    "id": 1,
+    "name": "Company 1",
+    "country": null,
+    "phone1": null,
+    "phone2": null,
+    "email": null,
+    "plan": null,
+    "facebook_url": null,
+    "twitter_url": null,
+    "instagram_url": null,
+    "users": [
+      {
         "id": 1,
-        "name": "Company 2",
-        "country": null,
-        "phone1": null,
-        "phone2": null,
-        "email": null,
-        "plan": null,
-        "facebook_url": null,
-        "twitter_url": null,
-        "instagram_url": null
+        "name": "test",
+        "username": "test",
+        "email": "tt@t.com",
+        "role": "user",
+        "profileImage": null
       }
-    },
-    {
-      "id": 2,
-      "first_name": "asasasasa",
-      "last_name": "roa",
-      "dni": "121212",
-      "phone1": null,
-      "phone2": null,
-      "companyId": 1,
-      "company": {
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Company 2",
+    "country": null,
+    "phone1": null,
+    "phone2": null,
+    "email": null,
+    "plan": null,
+    "facebook_url": null,
+    "twitter_url": null,
+    "instagram_url": null,
+    "users": [
+      {
         "id": 1,
-        "name": "Company 2",
-        "country": null,
-        "phone1": null,
-        "phone2": null,
-        "email": null,
-        "plan": null,
-        "facebook_url": null,
-        "twitter_url": null,
-        "instagram_url": null
+        "name": "test",
+        "username": "test",
+        "email": "tt@t.com",
+        "role": "user",
+        "profileImage": null
       }
-    },
-    {
-      "id": 3,
-      "first_name": "asasasasa",
-      "last_name": "roa",
-      "dni": "121212",
-      "phone1": null,
-      "phone2": null,
-      "companyId": 1,
-      "company": {
-        "id": 1,
-        "name": "Company 2",
-        "country": null,
-        "phone1": null,
-        "phone2": null,
-        "email": null,
-        "plan": null,
-        "facebook_url": null,
-        "twitter_url": null,
-        "instagram_url": null
-      }
-    },
-    {
-      "id": 4,
-      "first_name": "asasasasa",
-      "last_name": "roa",
-      "dni": "121212",
-      "phone1": null,
-      "phone2": null,
-      "companyId": 1,
-      "company": {
-        "id": 1,
-        "name": "Company 2",
-        "country": null,
-        "phone1": null,
-        "phone2": null,
-        "email": null,
-        "plan": null,
-        "facebook_url": null,
-        "twitter_url": null,
-        "instagram_url": null
-      }
-    }
-  ]
+    ]
+  }
+]

@@ -1,8 +1,8 @@
-import { CompanyInterface } from './../entities/company.interface';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from './../entities/company.entity';
+import { CompanyInterface } from './../entities/company.interface';
 
 @Injectable()
 export class CompanyService {
@@ -24,7 +24,7 @@ export class CompanyService {
     }
   }
 
-  public async update(id: number, company: CompanyInterface) {
+  public async update(id: number, company: Company) {
     try {
       await this.companyRepo.update(id, company)
       const companyUpdated = this.companyRepo.findOne(id)
