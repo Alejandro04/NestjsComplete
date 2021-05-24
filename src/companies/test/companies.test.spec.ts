@@ -50,10 +50,14 @@ describe('CompaniesCrud', () => {
   describe('create', () => {
     it('should create a company', async () => {
       const expectedCompany = {
-        name: 'Company 1',
-        users:  {
-          id: 1
-        }
+        name: 'Company 1'
+        /*
+        users:  [
+          {
+            id: 1
+          }
+        ]
+        */
       }
       
       const company = await service.create(expectedCompany)
@@ -76,10 +80,14 @@ describe('CompaniesCrud', () => {
     });
     it('should call create company service', async () => {
       const expectedCompany = {
-        name: 'Company 1',
-        users: {
-          id: 1
-        }
+        name: 'Company 1'
+        /*
+        users:  [
+          {
+            id: 1
+          }
+        ]
+        */
       }
       controller.create(expectedCompany)
       expect(service.create(expectedCompany))

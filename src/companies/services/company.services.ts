@@ -1,8 +1,8 @@
-import { CompanyInterface } from './../entities/company.interface';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from './../entities/company.entity';
+import { CompanyInterface } from './../entities/company.interface';
 
 @Injectable()
 export class CompanyService {
