@@ -22,7 +22,7 @@ export class CompanyController {
   
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() company: CompanyInterface) {
+  async update(@Param('id') id: number, @Body() company: Company) {
     return await this.companyService.update(id, company);
   }
 

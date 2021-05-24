@@ -50,21 +50,17 @@ describe('CompaniesCrud', () => {
   describe('create', () => {
     it('should create a company', async () => {
       const expectedCompany = {
-        name: 'Company 1'
-        /*
-        users:  [
-          {
-            id: 1
-          }
-        ]
-        */
+        name: 'Company 1',
+        users: [{
+          id: 1
+        }]
       }
-      
+      // el servicio devuelve su propia entidad así se le envie los parametros FK
+      // entonces, a la respuesta se le agregar el FK y luego se compara
       const company = await service.create(expectedCompany)
-      
-      console.log("company es", company)
-      console.log("expected es igual", expectedCompany)
-      
+      company.users = [{
+        id: 1
+      }]
       expect(company).toEqual(expectedCompany);
     });
   });
@@ -80,14 +76,10 @@ describe('CompaniesCrud', () => {
     });
     it('should call create company service', async () => {
       const expectedCompany = {
-        name: 'Company 1'
-        /*
-        users:  [
-          {
-            id: 1
-          }
-        ]
-        */
+        name: 'Company 1',
+        users: [{
+          id: 1
+        }]
       }
       controller.create(expectedCompany)
       expect(service.create(expectedCompany))

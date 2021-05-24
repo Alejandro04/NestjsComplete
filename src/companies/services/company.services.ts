@@ -24,7 +24,7 @@ export class CompanyService {
     }
   }
 
-  public async update(id: number, company: CompanyInterface) {
+  public async update(id: number, company: Company) {
     try {
       await this.companyRepo.update(id, company)
       const companyUpdated = this.companyRepo.findOne(id)
