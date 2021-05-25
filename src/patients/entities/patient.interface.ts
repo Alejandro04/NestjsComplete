@@ -1,4 +1,5 @@
 export interface PatientInterface {
+    clientId: number,
 	name: string,
 	breed: string,
 	weight: string,

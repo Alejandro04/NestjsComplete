@@ -8,6 +8,7 @@ class ApiServiceMock {
 
   create(patient: PatientInterface) {
     return {
+      clientId: patient.clientId,
       name: patient.name,
       breed: patient.breed,
       weight: patient.weight,
@@ -55,6 +56,7 @@ describe('PatientsController', () => {
   describe('create', () => {
     it('should create a patient', async () => {
       const expectedPatient = {
+        clientId: 1,
         name: 'Chester',
         breed: 'Pouder',
         weight: '7 Kg',
@@ -78,6 +80,7 @@ describe('PatientsController', () => {
     });
     it('should call create patient service', async () => {
       const expectedPatient = {
+        clientId: 1,
         name: 'Chester',
         breed: 'Pouder',
         weight: '7 Kg',
