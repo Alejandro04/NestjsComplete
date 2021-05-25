@@ -1,63 +1,69 @@
-import { ClientInterface } from '../entities/client.interface';
-import { ClientsController } from '../controllers/clients.controller';
-import { ClientService } from '../services/clients.services';
+import { PatientInterface } from '../entities/patient.interface';
+import { PatientsController } from '../controllers/patients.controller';
+import { PatientService } from '../services/patients.services';
 import { Test } from '@nestjs/testing';
-import MockDataClients from './mockdataclients.json';
+import MockDataPatients from './mockdatapatients.json';
 
 class ApiServiceMock {
 
-  create(client: ClientInterface) {
+  create(patient: PatientInterface) {
     return {
-      first_name: client.first_name,
-      last_name: client.last_name,
-      dni: client.dni
+      name: patient.name,
+      breed: patient.breed,
+      weight: patient.weight,
+      age: patient.age,
+      sex: patient.sex,
+      species: patient.species
     }
   }
 
   findAll() {
-    return MockDataClients
+    return MockDataPatients
   }
 }
 
-describe('ClientsController', () => {
-  let controller: ClientsController;
-  let service: ClientService;
+describe('PatientsController', () => {
+  let controller: PatientsController;
+  let service: PatientService;
 
   beforeEach(async () => {
     const ApiServiceProvider = {
-      provide: ClientService,
+      provide: PatientService,
       useClass: ApiServiceMock,
     };
     const moduleRef = await Test.createTestingModule({
-      controllers: [ClientsController],
-      providers: [ClientService, ApiServiceProvider],
+      controllers: [PatientsController],
+      providers: [PatientService, ApiServiceProvider],
     }).compile();
 
-      controller = moduleRef.get<ClientsController>(ClientsController);
-      service = moduleRef.get<ClientService>(ClientService);
+    controller = moduleRef.get<PatientsController>(PatientsController);
+    service = moduleRef.get<PatientService>(PatientService);
   });
 
-  it('ClientService - should be defined', () => {
+  it('PatientService - should be defined', () => {
     expect(service).toBeDefined();
   });
 
   describe('findAll', () => {
-    it('should get array of clients', async () => {
-      const expectedClients = MockDataClients
-      const clients = await service.findAll()
-      expect(clients).toEqual(expectedClients);
+    it('should get array of patients', async () => {
+      const expectedPatients = MockDataPatients
+      const patients = await service.findAll()
+      expect(patients).toEqual(expectedPatients);
     });
   });
 
   describe('create', () => {
-    it('should create a client', async () => {
-      const expectedClient = {
-        first_name: 'Alejandro',
-        last_name: 'Roa',
-        dni: '12121212'
+    it('should create a patient', async () => {
+      const expectedPatient = {
+        name: 'Chester',
+        breed: 'Pouder',
+        weight: '7 Kg',
+        age: '6 años',
+        sex: 'M',
+        species: 'Canino'
       }
-      const client = await service.create(expectedClient)
-      expect(client).toEqual(expectedClient);
+      const patient = await service.create(expectedPatient)
+      expect(patient).toEqual(expectedPatient);
     });
   });
 
@@ -65,21 +71,23 @@ describe('ClientsController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('Call clients service', () => {
-    it('should call get clients service', async () => {
+  describe('Call patients service', () => {
+    it('should call get patients service', async () => {
       controller.findAll()
       expect(service.findAll())
     });
-    it('should call create client service', async () => {
-      const expectedClient = {
-        first_name: 'Alejandro',
-        last_name: 'Roa',
-        dni: '12121212'
+    it('should call create patient service', async () => {
+      const expectedPatient = {
+        name: 'Chester',
+        breed: 'Pouder',
+        weight: '7 Kg',
+        age: '6 años',
+        sex: 'M',
+        species: 'Canino'
       }
-      controller.create(expectedClient)
-      expect(service.create(expectedClient))
+      controller.create(expectedPatient)
+      expect(service.create(expectedPatient))
     });
   });
-
 });
 

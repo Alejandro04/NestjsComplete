@@ -2,6 +2,7 @@ import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body }
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { PatientService } from '../services/patients.services';
 import { Patient } from '../entities/patient.entity';
+import { PatientInterface } from '../entities/patient.interface';
 
 @Controller('patients')
 export class PatientsController {
@@ -15,13 +16,13 @@ export class PatientsController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() patient: Patient) {
+  async create(@Body() patient: PatientInterface) {
     return await this.patientService.create(patient);
   }
   
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() patient: Patient) {
+  async update(@Param('id') id: number, @Body() patient: PatientInterface) {
     return await this.patientService.update(id, patient);
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Patient } from '../entities/patient.entity';
+import { PatientInterface } from '../entities/patient.interface';
 
 @Injectable()
 export class PatientService {
@@ -15,7 +16,7 @@ export class PatientService {
     }
   }
 
-  public async create(patient: Patient) {
+  public async create(patient: PatientInterface) {
     try {
       return await this.patientRepo.save(patient);
     } catch (error) {
@@ -23,7 +24,7 @@ export class PatientService {
     }
   }
 
-  public async update(id: number, patient: Patient) {
+  public async update(id: number, patient: PatientInterface) {
     try {
       await this.patientRepo.update(id, patient)
       const clientUpdated = this.patientRepo.findOne(id)
