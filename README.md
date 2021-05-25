@@ -1,6 +1,7 @@
 ### 1. Notas Unit Test con Mock
-Sirve para definir entradas y salidas de llamadas en el momento de crear la prueba y la funcionalidad
-No sirven para mantener un control en el tiempo de las llamadas
+Sirve para definir que entra y que sale en las peticiones.
+Cada vez que se haga un refactor de la funcionalidad, lo primero es cambiar la prueba
+la prueba debe fallar y después se desarrolla la funcionalidad para que pase.
 
 
 ### 0. Docu Relations CRUD
