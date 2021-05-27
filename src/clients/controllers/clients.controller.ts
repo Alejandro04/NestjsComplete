@@ -4,7 +4,7 @@ import { ClientService } from '../services/clients.services';
 import { Client } from '../entities/client.entity';
 import { ClientInterface } from '../entities/client.interface';
 
-@Controller('clients')
+@Controller('api/clients')
 export class ClientsController {
   constructor(private readonly clientService: ClientService) {}
 
