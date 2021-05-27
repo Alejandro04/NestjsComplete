@@ -81,5 +81,21 @@ describe('ClientsController', () => {
     });
   });
 
+  /*
+  Analizar cómo puede ser este test
+  describe('update', () => {
+    it('should update a client', async () => {
+      const id = 1
+      const expectedClient = {
+        first_name: 'Alejandro',
+        last_name: 'Roa',
+        dni: '12121212'
+      } 
+      controller.update(id, expectedClient)
+      expect(service.update(id, expectedClient))
+    });
+  });
+  */
+
 });
 

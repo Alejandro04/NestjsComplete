@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Put, Delete, Request, UseGuards, Param, Body } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ClientService } from '../services/clients.services';
 import { Client } from '../entities/client.entity';
@@ -21,7 +21,7 @@ export class ClientsController {
   }
   
   //@UseGuards(JwtAuthGuard)
-  @Patch(':id')
+  @Put(':id')
   async update(@Param('id') id: number, @Body() client: ClientInterface) {
     return await this.clientService.update(id, client);
   }

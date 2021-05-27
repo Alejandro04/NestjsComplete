@@ -20,6 +20,11 @@ export class Client {
   @Column({
     nullable: true,
   })
+  address: string;
+
+  @Column({
+    nullable: true,
+  })
   phone1: string;
 
   @Column({
