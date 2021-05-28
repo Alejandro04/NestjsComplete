@@ -21,7 +21,7 @@ export class ClientsController {
   }
   
   //@UseGuards(JwtAuthGuard)
-  @Put(':id')
+  @Patch(':id')
   async update(@Param('id') id: number, @Body() client: ClientInterface) {
     return await this.clientService.update(id, client);
   }
