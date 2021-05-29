@@ -2,6 +2,7 @@ import { Controller, Get, Post, Patch, Delete, Request, UseGuards, Param, Body }
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ConsultServices } from '../services/consult.services';
 import { Consult } from '../entities/consult.entity';
+import { ConsultInterface } from '../entities/consult.interface';
 
 @Controller('consults')
 export class ConsultController {
@@ -15,13 +16,13 @@ export class ConsultController {
 
   //@UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() consult: Consult) {
+  async create(@Body() consult: ConsultInterface) {
     return await this.consultService.create(consult);
   }
   
   //@UseGuards(JwtAuthGuard)
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() consult: Consult) {
+  async update(@Param('id') id: number, @Body() consult: ConsultInterface) {
     return await this.consultService.update(id, consult);
   }
 

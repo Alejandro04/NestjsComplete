@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Consult } from './../entities/consult.entity';
+import { ConsultInterface } from '../entities/consult.interface';
 
 @Injectable()
 export class ConsultServices {
@@ -15,7 +16,7 @@ export class ConsultServices {
     }
   }
 
-  public async create(consult: Consult) {
+  public async create(consult: ConsultInterface) {
     try {
       return await this.consultRepo.save(consult);
     } catch (error) {
@@ -23,7 +24,7 @@ export class ConsultServices {
     }
   }
 
-  public async update(id: number, consult: Consult) {
+  public async update(id: number, consult: ConsultInterface) {
     try {
       await this.consultRepo.update(id, consult)
       const consultUpdated = this.consultRepo.findOne(id)
