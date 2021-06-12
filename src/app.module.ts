@@ -14,11 +14,11 @@ import { PatientsModule } from './patients/patients.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'database-1.cthrokqgzera.us-east-1.rds.amazonaws.com',
+      host: '',
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'database-1',
+      database: '',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false
     }),

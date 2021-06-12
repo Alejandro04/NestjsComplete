@@ -1,10 +1,10 @@
 {
     "type": "postgres",
-    "host": "database-1.cthrokqgzera.us-east-1.rds.amazonaws.com",
+    "host": "",
     "port": 5432,
     "username": "postgres",
     "password": "postgres",
-    "database": "database-1",
+    "database": "",
     "entities": ["src/**/*.entity.ts"],
     "synchronize": false,
     "migrationsTableName": "migrations",

@@ -3,11 +3,6 @@ Sirve para definir que entra y que sale en las peticiones.
 Cada vez que se haga un refactor de la funcionalidad, lo primero es cambiar la prueba
 la prueba debe fallar y después se desarrolla la funcionalidad para que pase.
 
-
-### 0. Docu Relations CRUD
-https://wanago.io/2020/06/22/api-nestjs-relationships-postgres-typeorm/
-
-
 ### 1. Create project
 ```bash
 npm i -g @nestjs/cli
@@ -72,7 +67,6 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql
 ```
-https://dev.to/andrewallison/docker-and-windows-1cb0
 
 ### 6. Add .gitignore /postgres_data
 ```bash
